@@ -1,0 +1,10 @@
+<div class="card mt-4">
+    <h4 class="card-header">Você está conectado com Angular e JWT!!.</h4>
+    <div class="card-body">
+        <h6>usuários do ponto de extremidade api seguro</h6>
+        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+        <ul *ngIf="users>
+              <li *ngFor=" let user users ">{{user.firstName}} {{user.lastName}}</li>
+         </ul>
+    </div>
+</div>
