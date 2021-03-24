@@ -7,13 +7,13 @@ import { AuthenticationService } from '../_services/authentication.service';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) { }
 
-  imtercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
     const currentUser = this.authenticationService.currentUserValue;
     const isLoggedIn = currentUser && currentUser.token;
     const isApiUrl = request.url.startsWith(environment.apiUrl);
-
     if (isLoggedIn && isApiUrl) {
       request = request.clone({
         setHeaders: {
@@ -21,6 +21,7 @@ export class JwtInterceptor implements HttpInterceptor {
         }
       });
     }
+
     return next.handle(request);
   }
 }
